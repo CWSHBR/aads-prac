@@ -1,16 +1,63 @@
 #include "vector-top-it.h"
 #include <iostream>
 #include <cstddef>
-bool test1() {
-    using topit::Vector;
-    Vector<int> v;
+
+using topit::Vector;
+
+bool test1()
+{
+    Vector< int > v;
     return v.isEmpty();
 }
+
+bool test2()
+{
+    Vector< int > v;
+    return v.getSize() == 0;
+}
+
+bool test3()
+{
+    size_t s = 3ull;
+    Vector< int > v(s);
+    return v.getSize() == s;
+}
+
+bool test4()
+{
+    size_t s = 4ull;
+    try {
+        Vector< int > v(s);
+        v.at(0);
+        return true;
+    } catch (...) {
+        return false;
+    }
+}
+
+bool test5()
+{
+    size_t s = 5ull;
+    try {
+        Vector< int > v(s);
+        v.at(s);
+        return false;
+    } catch (const std::out_of_range& e) {
+        return true;
+    } catch (...) {
+        return false;
+    }
+}
+
 int main() {
     using test_t = bool (*)();
     using case_t = std::pair< test_t, const char* >;
     case_t tests[] = {
-        { test1, "Default constructed vector must be empty" }
+        { test1, "Default constructed vector must be empty" },
+        { test2, "Default constructed vector size must be zero" },
+        { test3, "Vector constructed with size must return correct size" },
+        { test4, "Vector.at() must return reference to element if index is in range" },
+        { test5, "Vector.at() must throw std::out_of_range if index is out of range" }
     };
     std::cout << std::boolalpha;
     for (size_t i = 0; i < sizeof(tests) / sizeof(case_t); ++i) {
