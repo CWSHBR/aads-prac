@@ -19,16 +19,16 @@ bool test2()
 bool test3()
 {
     size_t s = 3ull;
-    Vector< int > v(s);
+    Vector< int > v(s, 0);
     return v.getSize() == s;
 }
 
 bool test4()
 {
-    size_t s = 4ull;
+    constexpr size_t s = 4ull;
     try {
-        Vector< int > v(s);
-        v.at(0);
+        Vector< int > v(s, 0);
+        v.at(0ull);
         return true;
     } catch (...) {
         return false;
@@ -37,9 +37,9 @@ bool test4()
 
 bool test5()
 {
-    size_t s = 5ull;
+   constexpr size_t s = 5ull;
     try {
-        Vector< int > v(s);
+        Vector< int > v(s, 0);
         v.at(s);
         return false;
     } catch (const std::out_of_range&) {
@@ -51,9 +51,9 @@ bool test5()
 
 bool test6()
 {
-    size_t s = 4ull;
+    constexpr size_t s = 4ull;
     try {
-        const Vector< int > v(s);
+        const Vector< int > v(s, 0);
         v.at(0);
         return true;
     } catch (...) {
@@ -63,9 +63,9 @@ bool test6()
 
 bool test7()
 {
-    size_t s = 5ull;
+    constexpr size_t s = 5ull;
     try {
-        const Vector< int > v(s);
+        const Vector< int > v(s, 0);
         v.at(s);
         return false;
     } catch (const std::out_of_range&) {

@@ -7,6 +7,7 @@ namespace topit {
     struct Vector {
         Vector();
         explicit Vector(size_t s);
+        Vector(size_t s, const T& val);
         ~Vector();
 
         Vector(const Vector<T> &) = delete;
@@ -77,6 +78,15 @@ topit::Vector<T>::Vector(size_t s) :
     size_(s),
     capacity_(s)
 {}
+
+template<class T>
+topit::Vector<T>::Vector(size_t s, const T &val) :
+    Vector(s)
+{
+    for (size_t i = 0; i < s; ++i) {
+        data_[i] = val;
+    }
+}
 
 template<class T>
 topit::Vector<T>::Vector() : data_(nullptr), size_(0), capacity_(0) {}
