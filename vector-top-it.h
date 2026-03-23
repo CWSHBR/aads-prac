@@ -58,11 +58,7 @@ const T& topit::Vector<T>::operator[](size_t i) const noexcept
 template<class T>
 T& topit::Vector<T>::at(size_t i)
 {
-    if (i >= size_) {
-        throw std::out_of_range("Index out of range");
-    }
-
-    return data_[i];
+    return static_cast < T& > (static_cast< const Vector * >(this)->at(i));
 }
 
 template<class T>
