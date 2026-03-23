@@ -64,7 +64,7 @@ const T& topit::Vector<T>::operator[](size_t i) const noexcept
 template<class T>
 T& topit::Vector<T>::at(size_t i)
 {
-    return static_cast < T& > (static_cast< const Vector < T >  * >(this)->at(i));
+    return const_cast < T& > (static_cast< const Vector < T > &>(*this).at(i));
 }
 
 template<class T>
