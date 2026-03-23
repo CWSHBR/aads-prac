@@ -27,9 +27,8 @@ bool test4()
 {
     constexpr size_t s = 4ull;
     try {
-        Vector< int > v(s, 0);
-        v.at(0ull);
-        return true;
+        Vector< int > v(s, 1);
+        return v.at(0) == 1;
     } catch (...) {
         return false;
     }
@@ -53,9 +52,8 @@ bool test6()
 {
     constexpr size_t s = 4ull;
     try {
-        const Vector< int > v(s, 0);
-        v.at(0);
-        return true;
+        const Vector< int > v(s, 9);
+        return v.at(0) == 9;
     } catch (...) {
         return false;
     }

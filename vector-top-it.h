@@ -30,6 +30,9 @@ namespace topit {
 
     template<class T>
     bool operator==(const Vector<T>& lhs, const Vector<T>& rhs);
+
+    template<class T>
+    bool operator!=(const Vector<T>& lhs, const Vector<T>& rhs);
 }
 
 template<class T>
@@ -59,7 +62,7 @@ const T& topit::Vector<T>::operator[](size_t i) const noexcept
 template<class T>
 T& topit::Vector<T>::at(size_t i)
 {
-    return static_cast < T& > (static_cast< const Vector * >(this)->at(i));
+    return static_cast < T& > (static_cast< const Vector < T >  * >(this)->at(i));
 }
 
 template<class T>
@@ -70,6 +73,28 @@ const T& topit::Vector<T>::at(size_t i) const
     }
 
     return data_[i];
+}
+
+template<class T>
+bool topit::operator==(const Vector<T> &lhs, const Vector<T> &rhs)
+{
+    if (lhs.getSize() != rhs.getSize()) {
+        return false;
+    }
+
+    for (size_t i = 0; i < lhs.getSize(); ++i) {
+        if (lhs[i] != rhs[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+template<class T>
+bool topit::operator!=(const Vector<T> &lhs, const Vector<T> &rhs)
+{
+    return !(lhs == rhs);
 }
 
 template< class T >
