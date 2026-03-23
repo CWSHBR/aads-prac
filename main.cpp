@@ -87,9 +87,20 @@ int main() {
         { test6, "Const Vector.at() must return reference to element if index is in range" },
         { test7, "Const Vector.at() must throw std::out_of_range if index is out of range" }
     };
+
     std::cout << std::boolalpha;
-    for (size_t i = 0; i < sizeof(tests) / sizeof(case_t); ++i) {
-        std::cout << tests[i].first() << ": " << tests[i].second << "\n";
+    bool all_passed = true;
+    size_t cnt = sizeof(tests) / sizeof(case_t);
+    size_t success_cnt = 0;
+    for (size_t i = 0; i < cnt; ++i) {
+        bool res = tests[i].first();
+        all_passed = all_passed && res;
+        const char * msg = res ? "OK" : "FAILED";
+        std::cout << msg << ": " << tests[i].second << "\n";
+        success_cnt++;
     }
+    std::cout << "\n";
+    std::cout << "Passed " << success_cnt << " out of " << cnt << " tests" << "\n";
+    if (all_passed) std::cout << "All tests passed" << "\n";
 }
 
