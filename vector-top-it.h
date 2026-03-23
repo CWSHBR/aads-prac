@@ -46,12 +46,13 @@ size_t topit::Vector<T>::getSize() const noexcept
 template<class T>
 T& topit::Vector<T>::operator[](size_t i) noexcept
 {
-
+    return data_[i];
 }
 
 template<class T>
 const T& topit::Vector<T>::operator[](size_t i) const noexcept
 {
+    return data_[i];
 }
 
 template<class T>

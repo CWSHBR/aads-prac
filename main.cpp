@@ -42,7 +42,33 @@ bool test5()
         Vector< int > v(s);
         v.at(s);
         return false;
-    } catch (const std::out_of_range& e) {
+    } catch (const std::out_of_range&) {
+        return true;
+    } catch (...) {
+        return false;
+    }
+}
+
+bool test6()
+{
+    size_t s = 4ull;
+    try {
+        const Vector< int > v(s);
+        v.at(0);
+        return true;
+    } catch (...) {
+        return false;
+    }
+}
+
+bool test7()
+{
+    size_t s = 5ull;
+    try {
+        const Vector< int > v(s);
+        v.at(s);
+        return false;
+    } catch (const std::out_of_range&) {
         return true;
     } catch (...) {
         return false;
@@ -57,7 +83,9 @@ int main() {
         { test2, "Default constructed vector size must be zero" },
         { test3, "Vector constructed with size must return correct size" },
         { test4, "Vector.at() must return reference to element if index is in range" },
-        { test5, "Vector.at() must throw std::out_of_range if index is out of range" }
+        { test5, "Vector.at() must throw std::out_of_range if index is out of range" },
+        { test6, "Const Vector.at() must return reference to element if index is in range" },
+        { test7, "Const Vector.at() must throw std::out_of_range if index is out of range" }
     };
     std::cout << std::boolalpha;
     for (size_t i = 0; i < sizeof(tests) / sizeof(case_t); ++i) {
