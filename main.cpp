@@ -13,7 +13,7 @@ int main() {
     };
     std::cout << std::boolalpha;
     for (size_t i = 0; i < sizeof(tests) / sizeof(test_t); ++i) {
-        std::cout << tests[i]() << std::endl;
+        std::cout << tests[i]() << "i" << i << "/n";
     }
 }
 
