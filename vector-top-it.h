@@ -7,9 +7,14 @@
 namespace topit {
     template<class T>
     struct Vector {
-        T* data;
-        size_t size;
-        size_t capacity;
+        Vector();
+        ~Vector();
+        bool isEmpty() const noexcept;
+
+        private:
+         T* data;
+         size_t size;
+         size_t capacity;
 
     };
     template<class T>
