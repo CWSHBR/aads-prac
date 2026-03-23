@@ -21,6 +21,8 @@ namespace topit {
         T& at(size_t i);
         const T& at(size_t i) const;
 
+        void push_back(const T& val);
+
         private:
          T* data_;
          size_t size_;
@@ -73,6 +75,23 @@ const T& topit::Vector<T>::at(size_t i) const
     }
 
     return data_[i];
+}
+
+template<class T>
+void topit::Vector<T>::push_back(const T &val)
+{
+    if (size_ == capacity_) {
+        size_t new_capacity = capacity_ ? capacity_ * 2 : 1;
+        T* new_data = new T[new_capacity];
+        for (size_t i = 0; i < size_; ++i) {
+            new_data[i] = data_[i];
+        }
+        delete[] data_;
+        data_ = new_data;
+        capacity_ = new_capacity;
+    }
+
+    data_[size_++] = val;
 }
 
 template<class T>
