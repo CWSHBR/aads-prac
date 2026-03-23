@@ -1,9 +1,6 @@
-//
-// Created by platon on 23.03.2026.
-//
 #include <cstddef>
-#ifndef INC_23_03_2026_VECTOR_TOP_IT_H
-#define INC_23_03_2026_VECTOR_TOP_IT_H
+#ifndef VECTOR_TOP_IT_H
+#define VECTOR_TOP_IT_H
 namespace topit {
     template<class T>
     struct Vector {
