@@ -1,5 +1,6 @@
 #include "vector-top-it.h"
-
+#include <iostream>
+#include <cstddef>
 bool test1() {
     using topit::Vector;
     Vector<int> v;
