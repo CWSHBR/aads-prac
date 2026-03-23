@@ -1,6 +1,7 @@
 #include "vector-top-it.h"
 #include <iostream>
 #include <cstddef>
+#include <string>
 
 using topit::Vector;
 
@@ -73,6 +74,38 @@ bool test7()
     }
 }
 
+bool test8()
+{
+    Vector< int > v;
+    v.push_back(42);
+    return !v.isEmpty() && v.getSize() == 1 && v.at(0) == 42;
+}
+
+bool test9()
+{
+    Vector< int > v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+
+    return v.getSize() == 3 && v[0] == 1 && v.at(1) == 2 && v[2] == 3;
+}
+
+bool test10()
+{
+    Vector< std::string > v;
+    for (int i = 0; i < 100; ++i) {
+        v.push_back(std::string("v") + std::to_string(i));
+    }
+
+    if (v.getSize() != 100) return false;
+    if (v.at(0) != "v0") return false;
+    if (v.at(1) != "v1") return false;
+    if (v.at(50) != "v50") return false;
+    if (v.at(99) != "v99") return false;
+    return true;
+}
+
 int main() {
     using test_t = bool (*)();
     using case_t = std::pair< test_t, const char* >;
@@ -83,7 +116,10 @@ int main() {
         { test4, "Vector.at() must return reference to element if index is in range" },
         { test5, "Vector.at() must throw std::out_of_range if index is out of range" },
         { test6, "Const Vector.at() must return reference to element if index is in range" },
-        { test7, "Const Vector.at() must throw std::out_of_range if index is out of range" }
+        { test7, "Const Vector.at() must throw std::out_of_range if index is out of range" },
+        { test8, "Vector.push_back() on empty vector must add element and increase size" },
+        { test9, "Vector.push_back() must append elements preserving order" },
+        { test10, "Vector.push_back() must keep existing elements after reallocations" }
     };
 
     std::cout << std::boolalpha;

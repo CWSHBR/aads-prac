@@ -2,6 +2,7 @@
 #include <stdexcept>
 #ifndef VECTOR_TOP_IT_H
 #define VECTOR_TOP_IT_H
+
 namespace topit {
     template<class T>
     struct Vector {
