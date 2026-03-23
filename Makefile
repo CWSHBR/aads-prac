@@ -5,3 +5,6 @@ vector-tests: main.o
 	$(CXX) -o $@ $^
 
 -include main.d
+
+clean:
+	$(RM) -rf vector-tests main.o main.d
