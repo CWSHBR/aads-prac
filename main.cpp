@@ -8,12 +8,13 @@ bool test1() {
 }
 int main() {
     using test_t = bool (*)();
-    test_t tests[] = {
-        test1
+    using case_t = std::pair< test_t, const char* >;
+    case_t tests[] = {
+        { test1, "Default constructed vector must be empty" }
     };
     std::cout << std::boolalpha;
-    for (size_t i = 0; i < sizeof(tests) / sizeof(test_t); ++i) {
-        std::cout << tests[i]() << "i" << i << "/n";
+    for (size_t i = 0; i < sizeof(tests) / sizeof(case_t); ++i) {
+        std::cout << tests[i].first() << ": " << tests[i].second << "\n";
     }
 }
 
