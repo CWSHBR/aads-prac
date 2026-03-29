@@ -171,6 +171,19 @@ bool test17()
     return v.getCapacity() == 4;
 }
 
+bool test18()
+{
+    Vector< int > v(3, 1);
+    v[1] = 7;
+    return v[0] == 1 && v[1] == 7 && v[2] == 1;
+}
+
+bool test19()
+{
+    const Vector< int > v(3, 8);
+    return v[0] == 8 && v[1] == 8 && v[2] == 8;
+}
+
 int main() {
     using test_t = bool (*)();
     using case_t = std::pair< test_t, const char* >;
@@ -191,7 +204,9 @@ int main() {
         { test14, "operator!= must return true for vectors with same size but different elements" },
         { test15, "Default constructed vector capacity must be zero" },
         { test16, "Vector constructed with size must have capacity equal to size" },
-        { test17, "Vector.push_back() must grow capacity by doubling" }
+        { test17, "Vector.push_back() must grow capacity by doubling" },
+        { test18, "operator[] must return reference to element for non-const vector" },
+        { test19, "Const operator[] must return reference to element for const vector" }
     };
 
     std::cout << std::boolalpha;
