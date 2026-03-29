@@ -147,6 +147,30 @@ bool test14()
     return lhs != rhs;
 }
 
+bool test15()
+{
+    Vector< int > v;
+    return v.getCapacity() == 0;
+}
+
+bool test16()
+{
+    constexpr size_t s = 7ull;
+    Vector< int > v(s, 5);
+    return v.getCapacity() == s;
+}
+
+bool test17()
+{
+    Vector< int > v;
+    v.push_back(1);
+    if (v.getCapacity() != 1) return false;
+    v.push_back(2);
+    if (v.getCapacity() != 2) return false;
+    v.push_back(3);
+    return v.getCapacity() == 4;
+}
+
 int main() {
     using test_t = bool (*)();
     using case_t = std::pair< test_t, const char* >;
@@ -164,7 +188,10 @@ int main() {
         { test11, "operator== must return true for two empty vectors" },
         { test12, "operator== must return true for vectors with equal elements in the same order" },
         { test13, "operator!= must return true for vectors with different sizes" },
-        { test14, "operator!= must return true for vectors with same size but different elements" }
+        { test14, "operator!= must return true for vectors with same size but different elements" },
+        { test15, "Default constructed vector capacity must be zero" },
+        { test16, "Vector constructed with size must have capacity equal to size" },
+        { test17, "Vector.push_back() must grow capacity by doubling" }
     };
 
     std::cout << std::boolalpha;

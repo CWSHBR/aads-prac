@@ -16,6 +16,7 @@ namespace topit {
 
         bool isEmpty() const noexcept;
         size_t getSize() const noexcept;
+        size_t getCapacity() const noexcept;
 
         T& operator[](size_t i) noexcept;
         const T& operator[](size_t i) const noexcept;
@@ -48,6 +49,12 @@ template< class T >
 size_t topit::Vector<T>::getSize() const noexcept
 {
     return size_;
+}
+
+template< class T >
+size_t topit::Vector<T>::getCapacity() const noexcept
+{
+    return capacity_;
 }
 
 template<class T>
