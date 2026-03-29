@@ -5,6 +5,12 @@
 
 using topit::Vector;
 
+namespace {
+    const char* const kColorGreen = "\033[32m";
+    const char* const kColorRed = "\033[31m";
+    const char* const kColorReset = "\033[0m";
+}
+
 bool test1()
 {
     Vector< int > v;
@@ -214,11 +220,12 @@ int main() {
     size_t success_cnt = 0;
     for (size_t i = 0; i < cnt; ++i) {
         bool res = tests[i].first();
+        const char * color = res ? kColorGreen : kColorRed;
         const char * msg = res ? "OK" : "FAILED";
-        std::cout << msg << ": " << tests[i].second << "\n";
+        std::cout << color << msg << kColorReset << ": " << tests[i].second << "\n";
         if (res) success_cnt++;
     }
     std::cout << "\n";
     std::cout << "Passed " << success_cnt << " out of " << cnt << " tests" << "\n";
-    if (cnt == success_cnt) std::cout << "All tests passed" << "\n";
+    if (cnt == success_cnt) std::cout << kColorGreen << "All tests passed" << kColorReset << "\n";
 }
