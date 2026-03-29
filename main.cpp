@@ -106,6 +106,47 @@ bool test10()
     return true;
 }
 
+bool test11()
+{
+    Vector< int > lhs;
+    Vector< int > rhs;
+    return lhs == rhs;
+}
+
+bool test12()
+{
+    Vector< int > lhs;
+    Vector< int > rhs;
+    lhs.push_back(1);
+    rhs.push_back(1);
+    lhs.push_back(2);
+    rhs.push_back(2);
+    lhs.push_back(3);
+    rhs.push_back(3);
+    return lhs == rhs;
+}
+
+bool test13()
+{
+    Vector< int > lhs;
+    Vector< int > rhs;
+    lhs.push_back(1);
+    lhs.push_back(2);
+    rhs.push_back(1);
+    return lhs != rhs;
+}
+
+bool test14()
+{
+    Vector< int > lhs;
+    Vector< int > rhs;
+    lhs.push_back(1);
+    rhs.push_back(1);
+    lhs.push_back(2);
+    rhs.push_back(3);
+    return lhs != rhs;
+}
+
 int main() {
     using test_t = bool (*)();
     using case_t = std::pair< test_t, const char* >;
@@ -119,7 +160,11 @@ int main() {
         { test7, "Const Vector.at() must throw std::out_of_range if index is out of range" },
         { test8, "Vector.push_back() on empty vector must add element and increase size" },
         { test9, "Vector.push_back() must append elements preserving order" },
-        { test10, "Vector.push_back() must keep existing elements after reallocations" }
+        { test10, "Vector.push_back() must keep existing elements after reallocations" },
+        { test11, "operator== must return true for two empty vectors" },
+        { test12, "operator== must return true for vectors with equal elements in the same order" },
+        { test13, "operator!= must return true for vectors with different sizes" },
+        { test14, "operator!= must return true for vectors with same size but different elements" }
     };
 
     std::cout << std::boolalpha;
@@ -135,4 +180,3 @@ int main() {
     std::cout << "Passed " << success_cnt << " out of " << cnt << " tests" << "\n";
     if (cnt == success_cnt) std::cout << "All tests passed" << "\n";
 }
-
