@@ -83,16 +83,16 @@ bool test7()
 bool test8()
 {
     Vector< int > v;
-    v.push_back(42);
+    v.pushBack(42);
     return !v.isEmpty() && v.getSize() == 1 && v.at(0) == 42;
 }
 
 bool test9()
 {
     Vector< int > v;
-    v.push_back(1);
-    v.push_back(2);
-    v.push_back(3);
+    v.pushBack(1);
+    v.pushBack(2);
+    v.pushBack(3);
 
     return v.getSize() == 3 && v[0] == 1 && v.at(1) == 2 && v[2] == 3;
 }
@@ -101,7 +101,7 @@ bool test10()
 {
     Vector< std::string > v;
     for (int i = 0; i < 100; ++i) {
-        v.push_back(std::string("v") + std::to_string(i));
+        v.pushBack(std::string("v") + std::to_string(i));
     }
 
     if (v.getSize() != 100) return false;
@@ -123,12 +123,12 @@ bool test12()
 {
     Vector< int > lhs;
     Vector< int > rhs;
-    lhs.push_back(1);
-    rhs.push_back(1);
-    lhs.push_back(2);
-    rhs.push_back(2);
-    lhs.push_back(3);
-    rhs.push_back(3);
+    lhs.pushBack(1);
+    rhs.pushBack(1);
+    lhs.pushBack(2);
+    rhs.pushBack(2);
+    lhs.pushBack(3);
+    rhs.pushBack(3);
     return lhs == rhs;
 }
 
@@ -136,9 +136,9 @@ bool test13()
 {
     Vector< int > lhs;
     Vector< int > rhs;
-    lhs.push_back(1);
-    lhs.push_back(2);
-    rhs.push_back(1);
+    lhs.pushBack(1);
+    lhs.pushBack(2);
+    rhs.pushBack(1);
     return lhs != rhs;
 }
 
@@ -146,10 +146,10 @@ bool test14()
 {
     Vector< int > lhs;
     Vector< int > rhs;
-    lhs.push_back(1);
-    rhs.push_back(1);
-    lhs.push_back(2);
-    rhs.push_back(3);
+    lhs.pushBack(1);
+    rhs.pushBack(1);
+    lhs.pushBack(2);
+    rhs.pushBack(3);
     return lhs != rhs;
 }
 
@@ -169,11 +169,11 @@ bool test16()
 bool test17()
 {
     Vector< int > v;
-    v.push_back(1);
+    v.pushBack(1);
     if (v.getCapacity() != 1) return false;
-    v.push_back(2);
+    v.pushBack(2);
     if (v.getCapacity() != 2) return false;
-    v.push_back(3);
+    v.pushBack(3);
     return v.getCapacity() == 4;
 }
 
