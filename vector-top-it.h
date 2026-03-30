@@ -1,5 +1,6 @@
 #include <cstddef>
 #include <stdexcept>
+#include <__functional/function.h>
 #ifndef VECTOR_TOP_IT_H
 #define VECTOR_TOP_IT_H
 
@@ -11,8 +12,9 @@ namespace topit {
         Vector(size_t s, const T& val);
         ~Vector();
 
-        Vector(const Vector<T> &) = delete;
-        Vector<T> &operator=(const Vector<T> &) = delete;
+        Vector(const Vector &rhs);
+        Vector& operator=(const Vector &rhs);
+        void swap(Vector &rhs) noexcept;
 
         bool isEmpty() const noexcept;
         size_t getSize() const noexcept;
@@ -37,6 +39,31 @@ namespace topit {
 
     template<class T>
     bool operator!=(const Vector<T>& lhs, const Vector<T>& rhs);
+}
+
+template<class T>
+topit::Vector<T>::Vector(const Vector& rhs) :
+    Vector(rhs.getSize())
+{
+    for (size_t i = 0; i < rhs.getSize(); ++i) {
+        data_[i] = rhs[i];
+    }
+}
+
+template<class T>
+topit::Vector<T>& topit::Vector<T>::operator=(const Vector &rhs)
+{
+    Vector cpy(rhs);
+    swap(cpy);
+    return *this;
+}
+
+template<class T>
+void topit::Vector<T>::swap(Vector &rhs) noexcept
+{
+    std::swap(data_, rhs.data_);
+    std::swap(size_, rhs.size_);
+    std::swap(capacity_, rhs.capacity_);
 }
 
 template<class T>

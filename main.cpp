@@ -190,6 +190,34 @@ bool test19()
     return v[0] == 8 && v[1] == 8 && v[2] == 8;
 }
 
+bool test20()
+{
+    Vector< int > v(2, 0);
+    auto yav = v;
+    return v == yav;
+}
+
+bool test21()
+{
+    Vector< int > v;
+    Vector< int > yav(2, 0);
+    bool res = v != yav;
+    v = yav;
+    return res && v == yav;
+}
+
+bool test22()
+{
+    Vector< int > v(2, 0);
+    Vector< int > yav(3, 1);
+
+    Vector< int > cpyv(v);
+    Vector< int > yavcpy(yav);
+    v.swap(yav);
+
+    return cpyv == yav && yavcpy == v;
+}
+
 int main() {
     using test_t = bool (*)();
     using case_t = std::pair< test_t, const char* >;
@@ -212,7 +240,10 @@ int main() {
         { test16, "Vector constructed with size must have capacity equal to size" },
         { test17, "Vector.push_back() must grow capacity by doubling" },
         { test18, "operator[] must return reference to element for non-const vector" },
-        { test19, "Const operator[] must return reference to element for const vector" }
+        { test19, "Const operator[] must return reference to element for const vector" },
+        { test20, "Copy constructor must create equal vector" },
+        { test21, "Copy assignment operator must create equal vector" },
+        { test22, "swap() must swap vectors correctly" },
     };
 
     std::cout << std::boolalpha;
