@@ -28,7 +28,16 @@ namespace topit {
         const T& at(size_t i) const;
 
         void pushBack(const T& val);
-        void pushFront(const T& val);
+        void pushFront(const T& val); // + тесты
+
+        // классная работа (copy & swap) + тесты
+        void insert(size_t pos, const T& val);
+        void insert(size_t pos, const Vector<T> &rhs, size_t b, size_t e);
+        void erase(size_t pos);
+
+        // дз
+        // Итераторы для вектора (итераторы без тестов)
+        // По 3 штуки insert/erase c итераторами
 
         private:
          T* data_;
