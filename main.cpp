@@ -218,6 +218,26 @@ bool test22()
     return cpyv == yav && yavcpy == v;
 }
 
+bool test23()
+{
+    Vector< int > v(2,0);
+    Vector< int > cpy_v(v);
+
+    Vector< int > yav = std::move(v);
+    return yav == cpy_v;
+}
+
+bool test24()
+{
+    Vector< int > v(2, 0);
+    Vector< int > cpy_v(v);
+    Vector< int > yav;
+
+    yav = std::move(v);
+    return yav == cpy_v;
+
+}
+
 int main() {
     using test_t = bool (*)();
     using case_t = std::pair< test_t, const char* >;
@@ -244,6 +264,8 @@ int main() {
         { test20, "Copy constructor must create equal vector" },
         { test21, "Copy assignment operator must create equal vector" },
         { test22, "swap() must swap vectors correctly" },
+        { test23, "Move constructor must create equal vector" },
+        { test24, "Move assignment operator must create equal vector" },
     };
 
     std::cout << std::boolalpha;

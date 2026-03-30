@@ -14,6 +14,8 @@ namespace topit {
 
         Vector(const Vector &rhs);
         Vector& operator=(const Vector &rhs);
+        Vector(Vector &&rhs) noexcept;
+        Vector& operator=(Vector &&rhs) noexcept;
         void swap(Vector &rhs) noexcept;
 
         bool isEmpty() const noexcept;
@@ -52,6 +54,23 @@ topit::Vector<T>::Vector(const Vector& rhs) :
 
 template<class T>
 topit::Vector<T>& topit::Vector<T>::operator=(const Vector &rhs)
+{
+    Vector cpy(rhs);
+    swap(cpy);
+    return *this;
+}
+
+template<class T>
+topit::Vector<T>::Vector(Vector &&rhs) noexcept :
+  data_(rhs.data_),
+  size_(rhs.size_),
+  capacity_(rhs.capacity_)
+{
+    rhs.data_ = nullptr;
+}
+
+template<class T>
+topit::Vector<T> & topit::Vector<T>::operator=(Vector &&rhs) noexcept
 {
     Vector cpy(rhs);
     swap(cpy);
