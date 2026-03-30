@@ -42,6 +42,9 @@ namespace topit {
         void insert(VectorIterator pos, const T& val);
         void erase(VectorIterator pos);
 
+        template <class IT>
+        void insert(VectorIterator pos, IT begin, IT end);
+
         private:
          T* data_;
          size_t size_;
