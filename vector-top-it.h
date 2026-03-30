@@ -37,7 +37,10 @@ namespace topit {
 
         // дз
         // Итераторы для вектора (итераторы без тестов)
-        // По 3 штуки insert/erase c итераторами
+        // По 3 штуки insert/erase c итераторами (в сумме 6)
+        struct VectorIterator;
+        void insert(VectorIterator pos, const T& val);
+        void erase(VectorIterator pos);
 
         private:
          T* data_;
